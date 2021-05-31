@@ -2,6 +2,7 @@ import { listenerCount } from 'events';
 import {Request, Response} from 'express'
 import { getCustomRepository, getRepository } from 'typeorm';
 import { UserRepository } from '../../../repositories/UserRepository';
+import { UserServicie } from '../../../servicies/UserServicies';
 
 
 class UsersControler{
@@ -10,6 +11,16 @@ class UsersControler{
 
     const userRepository = getCustomRepository(UserRepository);
     const {nome, username, password ,Email, telefone} = request.body;
+
+    const userServicies = new UserServicie();
+
+    userServicies.create({
+        nome, 
+        username, 
+        password ,
+        Email, 
+        telefone
+    });
 
     return response.status(201).send();
     }

@@ -24,3 +24,5 @@ class PetsService{
     await petsRepository.save(pets);
     }
 }
+
+export {PetsService}
