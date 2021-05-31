@@ -9,4 +9,6 @@ const petsController = new PetsController();
 
 petsRoutes.post("/pets", petsController.create);
 
+petsRoutes.get("/pets", petsController.listByPet);
+
 export {petsRoutes};

@@ -25,6 +25,17 @@ class PetsController{
 
     return response.status(201).send();
     }
+    async listByPet(request: Request, response: Response){
+        const petRepository = getCustomRepository(PetsRepository);
+        const{id}=request.body
+
+          
+        const list = await petRepository.findOne({
+            id
+        });
+    
+        return response.send(list);
+    }
 }
 
 export {PetsController}

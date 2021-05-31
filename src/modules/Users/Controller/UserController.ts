@@ -24,14 +24,15 @@ class UsersControler{
 
     return response.status(201).send();
     }
-    async listByUser(username: string){
+    async listByUser(request: Request, response: Response){
     const userRepository = getCustomRepository(UserRepository);
+    const{Email}=request.body;
 
-    const list = await userRepository.find({
-        username
+    const list = await userRepository.findOne({
+        Email
     });
 
-    return list;
+    return response.send(list);
 }
    /* async update(request: Request, response: Response){
         const {id} = request.params;

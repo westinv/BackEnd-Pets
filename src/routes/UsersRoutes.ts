@@ -10,6 +10,7 @@ const userControler = new UsersControler();
 
 userRoutes.post("/users", userControler.create );
 
+userRoutes.get("/users", userControler.listByUser);
 
 
 export {userRoutes};
