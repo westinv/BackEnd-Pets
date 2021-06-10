@@ -1,15 +1,11 @@
-import { Router, request, response } from 'express';
-import { getCustomRepository } from 'typeorm';
-import { UsersControler } from '../modules/Users/Controller/UserController';
-import { UserRepository } from '../repositories/UserRepository';
+import { Router } from "express";
+
+import { UsersControler } from "../modules/Users/Controller/UserController";
 
 const userRoutes = Router();
 
 const userControler = new UsersControler();
 
+userRoutes.post("/users", userControler.create);
 
-userRoutes.post("/users", userControler.create );
-
-
-
-export {userRoutes};
+export { userRoutes };

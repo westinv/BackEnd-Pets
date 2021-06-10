@@ -1,40 +1,35 @@
-import {Entity, Column, PrimaryColumn} from 'typeorm'
-import {v4 as  uuidV4} from 'uuid';
-import 'reflect-metadata'
-
+import { Entity, Column, PrimaryColumn } from "typeorm";
+import { v4 as uuidV4 } from "uuid";
+import "reflect-metadata";
 
 @Entity("Pets")
+class Pets {
+  @PrimaryColumn()
+  id?: string;
 
-class Pets{
+  @Column()
+  nome: string;
 
-    @PrimaryColumn()
-    id?: string;
+  @Column()
+  descricao: string;
 
-    @Column()
-    nome: string;
+  @Column()
+  classe: string;
 
-    @Column()
-    descricao: string
+  @Column()
+  idade: string;
 
-    @Column()
-    classe: string
+  @Column()
+  raca: string;
 
-    @Column()
-    idade:string
+  @Column()
+  status: boolean;
 
-    @Column()
-    raca: string;
-    
-    @Column()
-    status: boolean;
-
-    constructor(){
-        if(!this.id){
-            this.id = uuidV4();
-        }
+  constructor() {
+    if (!this.id) {
+      this.id = uuidV4();
     }
-
-
+  }
 }
 
-export {Pets}
+export { Pets };

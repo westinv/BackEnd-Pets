@@ -1,8 +1,9 @@
 import { EntityRepository, Repository } from "typeorm";
+
 import { Pets } from "../model/Pets";
 
-
 @EntityRepository(Pets)
-class PetsRepository extends Repository<Pets>{}
+// eslint-disable-next-line prettier/prettier
+class PetsRepository extends Repository<Pets> { }
 
-export {PetsRepository};
+export { PetsRepository };

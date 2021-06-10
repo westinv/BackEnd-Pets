@@ -1,17 +1,15 @@
-import {Request, Response} from 'express'
-import { getCustomRepository, getRepository } from 'typeorm';
-import { PetsRepository } from '../repositories/PetsRepositories';
+import { Request, Response } from "express";
+import { getCustomRepository } from "typeorm";
 
-class PetsController{
+import { PetsRepository } from "../repositories/PetsRepositories";
 
-
-    async create(request: Request, response: Response){
-
+class PetsController {
+  async create(request: Request, response: Response) {
     const petsRepository = getCustomRepository(PetsRepository);
-    const {nome, descricao, classe, idade, raca, status} = request.body;
+    const { nome, descricao, classe, idade, raca, status } = request.body;
 
     return response.status(201).send();
-    }
+  }
 }
 
-export {PetsController}
+export { PetsController };
