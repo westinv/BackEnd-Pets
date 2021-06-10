@@ -1,23 +1,36 @@
+import { listenerCount } from "events";
 import { Request, Response } from "express";
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, getRepository } from "typeorm";
 
 import { UserRepository } from "../../../repositories/UserRepository";
+import { UserService } from "../../../services/UserService";
 
 class UsersControler {
   async create(request: Request, response: Response) {
     const userRepository = getCustomRepository(UserRepository);
     const { nome, username, password, Email, telefone } = request.body;
 
-    return response.status(201).send();
-  }
-  async listByUser(username: string) {
-    const userRepository = getCustomRepository(UserRepository);
+    const userServicies = new UserService();
 
-    const list = await userRepository.find({
+    userServicies.create({
+      nome,
       username,
+      password,
+      Email,
+      telefone,
     });
 
-    return list;
+    return response.status(201).send();
+  }
+  async listByUser(request: Request, response: Response) {
+    const userRepository = getCustomRepository(UserRepository);
+    const { Email } = request.body;
+
+    const list = await userRepository.findOne({
+      Email,
+    });
+
+    return response.send(list);
   }
   /* async update(request: Request, response: Response){
         const {id} = request.params;
