@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
-import { getCustomRepository, getRepository } from "typeorm";
+import { getCustomRepository } from "typeorm";
 
 import { PetsRepository } from "../repositories/PetsRepositories";
-import { PetsService } from "../servicies/PetsServicies";
+import { PetsService } from "../services/PetsService";
 
 class PetsController {
   async create(request: Request, response: Response) {
-    const petsRepository = getCustomRepository(PetsRepository);
     const { nome, descricao, classe, idade, raca, status } = request.body;
 
     const petsService = new PetsService();

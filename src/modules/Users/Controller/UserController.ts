@@ -1,13 +1,11 @@
-import { listenerCount } from "events";
 import { Request, Response } from "express";
-import { getCustomRepository, getRepository } from "typeorm";
+import { getCustomRepository } from "typeorm";
 
 import { UserRepository } from "../../../repositories/UserRepository";
 import { UserService } from "../../../services/UserService";
 
 class UsersControler {
   async create(request: Request, response: Response) {
-    const userRepository = getCustomRepository(UserRepository);
     const { nome, username, password, Email, telefone } = request.body;
 
     const userServicies = new UserService();
