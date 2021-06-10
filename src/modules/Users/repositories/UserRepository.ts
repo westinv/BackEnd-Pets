@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from "typeorm";
 
-import { Users } from "../modules/Users/model/Users";
+import { Users } from "../model/Users";
 
 @EntityRepository(Users)
 // eslint-disable-next-line prettier/prettier

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 
-import { UserRepository } from "../../../repositories/UserRepository";
-import { UserService } from "../../../services/UserService";
+import { UserRepository } from "../repositories/UserRepository";
+import { UserService } from "../services/UserService";
 
 class UsersControler {
   async create(request: Request, response: Response) {

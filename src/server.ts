@@ -3,7 +3,7 @@ import express from "express";
 import "./database";
 import "reflect-metadata";
 import { petsRoutes } from "./modules/Pets/routes/PetsRoutes";
-import { userRoutes } from "./routes/UsersRoutes";
+import { userRoutes } from "./modules/Users/routes/UsersRoutes";
 
 const app = express();
 
