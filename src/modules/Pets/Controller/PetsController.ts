@@ -1,35 +1,25 @@
 import { Request, Response } from "express";
-import { getCustomRepository } from "typeorm";
 
-import { PetsRepository } from "../repositories/PetsRepositories";
-import { PetsService } from "../services/PetsService";
+import { CreatePetService } from "../services/CreatePetService";
+import { ListPetByIdService } from "../services/ListPetByIdService";
 
 class PetsController {
   async create(request: Request, response: Response) {
-    const { nome, descricao, classe, idade, raca, status } = request.body;
+    const createPetService = new CreatePetService();
 
-    const petsService = new PetsService();
-
-    petsService.create({
-      nome,
-      descricao,
-      classe,
-      idade,
-      raca,
-      status,
-    });
+    createPetService.execute(request.body);
 
     return response.status(201).send();
   }
-  async listByPet(request: Request, response: Response) {
-    const petRepository = getCustomRepository(PetsRepository);
-    const { id } = request.body;
 
-    const list = await petRepository.findOne({
-      id,
-    });
+  async listPetById(request: Request, response: Response) {
+    const listPetById = new ListPetByIdService();
 
-    return response.send(list);
+    const { id } = request.params;
+
+    const pet = listPetById.execute({ id });
+
+    return response.status(201).json(pet);
   }
 }
 

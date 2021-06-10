@@ -8,6 +8,6 @@ const petsController = new PetsController();
 
 petsRoutes.post("/pets", petsController.create);
 
-petsRoutes.get("/pets", petsController.listByPet);
+petsRoutes.get("/pets/:id", petsController.listPetById);
 
 export { petsRoutes };

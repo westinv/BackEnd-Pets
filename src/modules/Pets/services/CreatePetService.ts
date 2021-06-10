@@ -11,10 +11,10 @@ interface IPetsCreate {
   status: boolean;
 }
 
-class PetsService {
-  async create({ nome, descricao, classe, idade, raca, status }: IPetsCreate) {
+class CreatePetService {
+  async execute({ nome, descricao, classe, idade, raca, status }: IPetsCreate) {
     const petsRepository = getCustomRepository(PetsRepository);
-    const pets = petsRepository.create({
+    const createdPet = petsRepository.create({
       nome,
       descricao,
       classe,
@@ -22,8 +22,10 @@ class PetsService {
       raca,
       status,
     });
-    await petsRepository.save(pets);
+    await petsRepository.save(createdPet);
+
+    return createdPet;
   }
 }
 
-export { PetsService };
+export { CreatePetService };
