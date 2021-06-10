@@ -10,4 +10,6 @@ petsRoutes.post("/pets", petsController.create);
 
 petsRoutes.get("/pets/:id", petsController.listPetById);
 
+petsRoutes.put("/pets/:id", petsController.updatePet);
+
 export { petsRoutes };

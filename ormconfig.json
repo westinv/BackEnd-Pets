@@ -3,7 +3,7 @@
   "port": 5432,
   "host": "localhost",
   "username": "postgres",
-  "password": "123",
+  "password": "postgres",
   "database": "projeto_engsoft",
   "entities": [
     "./src/modules/**/model/*.ts"
