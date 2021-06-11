@@ -4,6 +4,7 @@ import { PetsRepository } from "../repositories/PetsRepositories";
 
 interface IPetsCreate {
   nome: string;
+  user_id: string;
   descricao: string;
   classe: string;
   idade: string;
@@ -12,7 +13,15 @@ interface IPetsCreate {
 }
 
 class CreatePetService {
-  async execute({ nome, descricao, classe, idade, raca, status }: IPetsCreate) {
+  async execute({
+    nome,
+    descricao,
+    classe,
+    idade,
+    raca,
+    status,
+    user_id,
+  }: IPetsCreate) {
     const petsRepository = getCustomRepository(PetsRepository);
     const createdPet = petsRepository.create({
       nome,
@@ -21,6 +30,7 @@ class CreatePetService {
       idade,
       raca,
       status,
+      user_id,
     });
     await petsRepository.save(createdPet);
 

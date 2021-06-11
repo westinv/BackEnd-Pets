@@ -12,6 +12,10 @@ export class CreatePets1622474277554 implements MigrationInterface {
             isPrimary: true,
           },
           {
+            name: "user_id",
+            type: "uuid",
+          },
+          {
             name: "nome",
             type: "varchar",
           },

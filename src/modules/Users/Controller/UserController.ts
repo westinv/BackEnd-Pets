@@ -6,7 +6,7 @@ import { UserService } from "../services/UserService";
 
 class UsersControler {
   async create(request: Request, response: Response) {
-    const { nome, username, password, Email, telefone } = request.body;
+    const { nome, username, password, email, telefone } = request.body;
 
     const userServicies = new UserService();
 
@@ -14,7 +14,7 @@ class UsersControler {
       nome,
       username,
       password,
-      Email,
+      email,
       telefone,
     });
 
@@ -22,22 +22,13 @@ class UsersControler {
   }
   async listByUser(request: Request, response: Response) {
     const userRepository = getCustomRepository(UserRepository);
-    const { Email } = request.body;
+    const { email } = request.body;
 
     const list = await userRepository.findOne({
-      Email,
+      email,
     });
 
     return response.send(list);
   }
-  /* async update(request: Request, response: Response){
-        const {id} = request.params;
-        const {nome, username, password ,Email, telefone} = request.body;
-
-        return response.status(201).send();
-
-       
-    }
-    */
 }
 export { UsersControler };

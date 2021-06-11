@@ -10,6 +10,7 @@ interface IPetsUpdate {
   idade: string;
   raca: string;
   status: boolean;
+  user_id: string;
 }
 
 class UpdatePetService {
@@ -21,6 +22,7 @@ class UpdatePetService {
     idade,
     raca,
     status,
+    user_id,
   }: IPetsUpdate) {
     const petsRepository = getCustomRepository(PetsRepository);
 
@@ -40,6 +42,7 @@ class UpdatePetService {
       idade,
       raca,
       status,
+      user_id,
     };
 
     await petsRepository.save(updatedPet);

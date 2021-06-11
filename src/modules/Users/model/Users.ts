@@ -11,7 +11,7 @@ class Users {
   nome: string;
 
   @Column()
-  Email: string;
+  email: string;
 
   @Column()
   password: string;
