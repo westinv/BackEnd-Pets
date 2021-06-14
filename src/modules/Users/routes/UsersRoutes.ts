@@ -9,6 +9,6 @@ const userControler = new UsersControler();
 
 userRoutes.post("/users", userControler.create);
 
-userRoutes.get("/users", userControler.listByUser);
+userRoutes.get("/users/:email", userControler.showUserByEmail);
 
 export { userRoutes };

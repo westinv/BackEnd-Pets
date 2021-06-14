@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs";
 import { getCustomRepository } from "typeorm";
 
 import { UserRepository } from "../repositories/UserRepository";
@@ -11,18 +12,13 @@ interface IUserCreate {
 }
 
 class CreateUserService {
-  async execute({
-    nome,
-    username,
-    password, 
-    email,
-    telefone
-  }: IUserCreate) {
+  async execute({ nome, username, password, email, telefone }: IUserCreate) {
     const userRepository = getCustomRepository(UserRepository);
+    const hashedPassword = await hash(password, 8);
     const createdUser = userRepository.create({
       nome,
       username,
-      password,
+      password: hashedPassword,
       email,
       telefone,
     });

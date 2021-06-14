@@ -3,19 +3,19 @@ import { getCustomRepository } from "typeorm";
 import { UserRepository } from "../repositories/UserRepository";
 
 interface IUserList {
-    id: string;
+  email: string;
 }
 
-class ListUserByIdService {
-  async execute({ id }: IUserList) {
+class ShowUserByEmailService {
+  async execute({ email }: IUserList) {
     const userRepository = getCustomRepository(UserRepository);
 
     const user = await userRepository.findOne({
-      id,
+      email,
     });
 
     return user;
   }
 }
 
-export { ListUserByIdService };
+export { ShowUserByEmailService };

@@ -3,12 +3,12 @@ import { getCustomRepository } from "typeorm";
 import { UserRepository } from "../repositories/UserRepository";
 
 interface IUserUpdate {
-    id: string;
-    nome: string;
-    username: string;
-    password: string;
-    email: string;
-    telefone: string;
+  id: string;
+  nome: string;
+  username: string;
+  password: string;
+  email: string;
+  telefone: string;
 }
 
 class UpdateUserService {
@@ -16,9 +16,9 @@ class UpdateUserService {
     id,
     nome,
     username,
-    password, 
+    password,
     email,
-    telefone
+    telefone,
   }: IUserUpdate) {
     const userRepository = getCustomRepository(UserRepository);
 
@@ -27,17 +27,17 @@ class UpdateUserService {
     });
 
     if (!user) {
-        console.log("Usuário não encontrado");
+      console.log("Usuário não encontrado");
     }
 
     const updatedUser = {
-        ...user,
-        id,
-        nome,
-        username,
-        password, 
-        email,
-        telefone
+      ...user,
+      id,
+      nome,
+      username,
+      password,
+      email,
+      telefone,
     };
 
     await userRepository.save(updatedUser);
