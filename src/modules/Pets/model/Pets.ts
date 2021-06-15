@@ -11,6 +11,9 @@ class Pets {
   nome: string;
 
   @Column()
+  user_id: string;
+
+  @Column()
   descricao: string;
 
   @Column()

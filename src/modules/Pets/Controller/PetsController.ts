@@ -3,7 +3,10 @@ import { Request, Response } from "express";
 import { CreatePetService } from "../services/CreatePetService";
 import { DeletePetService } from "../services/DeletePetService";
 import { ListPetByClassService } from "../services/ListPetByClassService";
+import { ListPetByIdadeService } from "../services/ListPetByIdadeService";
 import { ListPetByIdService } from "../services/ListPetByIdService";
+import { ListPetByRacaService } from "../services/ListPetByRacaService";
+import { ListPetByStatusService } from "../services/ListPetByStatusService";
 import { UpdatePetService } from "../services/UpdatePetService";
 
 class PetsController {
@@ -52,6 +55,36 @@ class PetsController {
     const { classe } = request.params;
 
     const pets = await listPetByClass.execute({ classe });
+
+    return response.status(201).json(pets);
+  }
+
+  async listPetByIdade(request: Request, response: Response) {
+    const listPetByidade = new ListPetByIdadeService();
+
+    const { idade } = request.params;
+
+    const pets = await listPetByidade.execute({ idade });
+
+    return response.status(201).json(pets);
+  }
+
+  async listPetByRaca(request: Request, response: Response) {
+    const listPetByRaca = new ListPetByRacaService();
+
+    const { raca } = request.params;
+
+    const pets = await listPetByRaca.execute({ raca });
+
+    return response.status(201).json(pets);
+  }
+
+  async listPetByStatus(request: Request, response: Response) {
+    const listPetByStatus = new ListPetByStatusService();
+
+    const { status } = request.params;
+
+    const pets = await listPetByStatus.execute({ status });
 
     return response.status(201).json(pets);
   }
