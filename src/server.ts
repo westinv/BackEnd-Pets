@@ -7,7 +7,7 @@ import { petsRoutes } from "./modules/Pets/routes/PetsRoutes";
 import { authenticateUserRoutes } from "./modules/Users/routes/AuthenticateUserRoutes";
 import { userRoutes } from "./modules/Users/routes/UsersRoutes";
 
-dotenv.config({ path: ".env" });
+dotenv.config();
 
 const app = express();
 

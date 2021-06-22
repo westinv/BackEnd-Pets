@@ -29,7 +29,7 @@ require("reflect-metadata");
 var PetsRoutes_1 = require("./modules/Pets/routes/PetsRoutes");
 var AuthenticateUserRoutes_1 = require("./modules/Users/routes/AuthenticateUserRoutes");
 var UsersRoutes_1 = require("./modules/Users/routes/UsersRoutes");
-dotenv.config({ path: ".env" });
+dotenv.config();
 var app = express_1.default();
 app.use(express_1.default.json());
 app.use(UsersRoutes_1.userRoutes);
