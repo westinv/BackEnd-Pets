@@ -17,9 +17,6 @@ class Pets {
   descricao: string;
 
   @Column()
-  user_id: string;
-
-  @Column()
   classe: string;
 
   @Column()
