@@ -83,8 +83,14 @@ class PetsController {
     const listPetByStatus = new ListPetByStatusService();
 
     const { status } = request.params;
+    let isTrueSet;
+    if (status === "true") {
+      isTrueSet = true;
+    } else {
+      isTrueSet = false;
+    }
 
-    const pets = await listPetByStatus.execute({ status });
+    const pets = await listPetByStatus.execute({ status: isTrueSet });
 
     return response.status(201).json(pets);
   }
