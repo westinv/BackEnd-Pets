@@ -16,4 +16,4 @@ app.use(express.json());
 app.use(userRoutes);
 app.use(petsRoutes);
 app.use(authenticateUserRoutes);
-app.listen(3333, () => console.log("rodando"));
+app.listen(process.env.PORT || 3333, () => console.log("rodando"));
