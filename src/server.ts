@@ -16,4 +16,9 @@ app.use(express.json());
 app.use(userRoutes);
 app.use(petsRoutes);
 app.use(authenticateUserRoutes);
+
+app.get("/", (request, response) => {
+  response.status(200).json({ message: "Servidor online" });
+});
+
 app.listen(process.env.PORT || 3333, () => console.log("rodando"));
