@@ -8,3 +8,5 @@ exports.userRoutes = userRoutes;
 var userControler = new UserController_1.UsersControler();
 userRoutes.post("/users", userControler.create);
 userRoutes.get("/users/:email", userControler.showUserByEmail);
+userRoutes.put("/users/:id", userControler.updateUser);
+userRoutes.delete("/users/:id", userControler.deleteUser);

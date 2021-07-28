@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 
+import AppError from "../../../utils/AppError";
 import { UserRepository } from "../repositories/UserRepository";
 
 interface IUserUpdate {
@@ -27,7 +28,7 @@ class UpdateUserService {
     });
 
     if (!user) {
-      console.log("Usuário não encontrado");
+      throw new AppError("Usuário não encontrado");
     }
 
     const updatedUser = {

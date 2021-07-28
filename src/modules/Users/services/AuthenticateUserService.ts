@@ -2,6 +2,7 @@ import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
 
+import AppError from "../../../utils/AppError";
 import { UserRepository } from "../repositories/UserRepository";
 
 interface IAuthenticateUser {
@@ -16,19 +17,18 @@ class AuthenticateUserService {
     const user = await userRepository.findOne({ email });
 
     if (!user) {
-      console.log("Email or password incorrect", 401);
-      return "ok";
+      throw new AppError("Usuário não encontrado");
     }
     console.log(user.password);
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      console.log("Email or password incorrect", 401);
+      throw new AppError("Email ou senha incorretos");
     }
 
     const token = jwt.sign(
       { id: user.id, nome: user.nome, email: user.email },
-      "Renato",
+      process.env.JWT_SECRET || "",
       {
         expiresIn: "7d",
       }

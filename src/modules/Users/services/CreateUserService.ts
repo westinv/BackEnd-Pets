@@ -1,6 +1,8 @@
 import { hash } from "bcryptjs";
 import { getCustomRepository } from "typeorm";
 
+import AppError from "../../../utils/AppError";
+import { Users } from "../model/Users";
 import { UserRepository } from "../repositories/UserRepository";
 
 interface IUserCreate {
@@ -12,9 +14,22 @@ interface IUserCreate {
 }
 
 class CreateUserService {
-  async execute({ nome, username, password, email, telefone }: IUserCreate) {
+  public async execute({
+    nome,
+    username,
+    password,
+    email,
+    telefone,
+  }: IUserCreate): Promise<Users> {
     const userRepository = getCustomRepository(UserRepository);
     const hashedPassword = await hash(password, 8);
+
+    const userAlreadyExists = await userRepository.findOne({ email });
+
+    if (userAlreadyExists) {
+      throw new AppError("Usuário já cadastrado");
+    }
+
     const createdUser = userRepository.create({
       nome,
       username,
@@ -22,6 +37,7 @@ class CreateUserService {
       email,
       telefone,
     });
+
     await userRepository.save(createdUser);
 
     return createdUser;

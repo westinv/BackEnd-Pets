@@ -43,6 +43,7 @@ exports.AuthenticateUserService = void 0;
 var bcryptjs_1 = require("bcryptjs");
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var typeorm_1 = require("typeorm");
+var AppError_1 = __importDefault(require("../../../utils/AppError"));
 var UserRepository_1 = require("../repositories/UserRepository");
 var AuthenticateUserService = /** @class */ (function () {
     function AuthenticateUserService() {
@@ -59,17 +60,16 @@ var AuthenticateUserService = /** @class */ (function () {
                     case 1:
                         user = _b.sent();
                         if (!user) {
-                            console.log("Email or password incorrect", 401);
-                            return [2 /*return*/, "ok"];
+                            throw new AppError_1.default("Usuário não encontrado");
                         }
                         console.log(user.password);
                         return [4 /*yield*/, bcryptjs_1.compare(password, user.password)];
                     case 2:
                         passwordMatch = _b.sent();
                         if (!passwordMatch) {
-                            console.log("Email or password incorrect", 401);
+                            throw new AppError_1.default("Email ou senha incorretos");
                         }
-                        token = jsonwebtoken_1.default.sign({ id: user.id, nome: user.nome, email: user.email }, "Renato", {
+                        token = jsonwebtoken_1.default.sign({ id: user.id, nome: user.nome, email: user.email }, process.env.JWT_SECRET || "", {
                             expiresIn: "7d",
                         });
                         return [2 /*return*/, token];

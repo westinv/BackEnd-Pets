@@ -35,10 +35,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserService = void 0;
 var bcryptjs_1 = require("bcryptjs");
 var typeorm_1 = require("typeorm");
+var AppError_1 = __importDefault(require("../../../utils/AppError"));
 var UserRepository_1 = require("../repositories/UserRepository");
 var CreateUserService = /** @class */ (function () {
     function CreateUserService() {
@@ -46,7 +50,7 @@ var CreateUserService = /** @class */ (function () {
     CreateUserService.prototype.execute = function (_a) {
         var nome = _a.nome, username = _a.username, password = _a.password, email = _a.email, telefone = _a.telefone;
         return __awaiter(this, void 0, void 0, function () {
-            var userRepository, hashedPassword, createdUser;
+            var userRepository, hashedPassword, userAlreadyExists, createdUser;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -54,6 +58,12 @@ var CreateUserService = /** @class */ (function () {
                         return [4 /*yield*/, bcryptjs_1.hash(password, 8)];
                     case 1:
                         hashedPassword = _b.sent();
+                        return [4 /*yield*/, userRepository.findOne({ email: email })];
+                    case 2:
+                        userAlreadyExists = _b.sent();
+                        if (userAlreadyExists) {
+                            throw new AppError_1.default("Usuário já cadastrado");
+                        }
                         createdUser = userRepository.create({
                             nome: nome,
                             username: username,
@@ -62,7 +72,7 @@ var CreateUserService = /** @class */ (function () {
                             telefone: telefone,
                         });
                         return [4 /*yield*/, userRepository.save(createdUser)];
-                    case 2:
+                    case 3:
                         _b.sent();
                         return [2 /*return*/, createdUser];
                 }

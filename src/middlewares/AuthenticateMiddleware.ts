@@ -3,6 +3,7 @@ import { verify } from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
 
 import { UserRepository } from "../modules/Users/repositories/UserRepository";
+import AppError from "../utils/AppError";
 
 interface IPayload {
   email: string;
@@ -25,12 +26,10 @@ export async function ensureAuthenticated(
 
   const userRepository = getCustomRepository(UserRepository);
 
-  console.log(email);
-
   const user = await userRepository.findOne({ email });
 
   if (!user) {
-    throw new Error("Invalid Token");
+    throw new AppError("Invalid Token");
   }
 
   next();

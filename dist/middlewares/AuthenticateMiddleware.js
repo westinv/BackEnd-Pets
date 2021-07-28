@@ -35,11 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ensureAuthenticated = void 0;
 var jsonwebtoken_1 = require("jsonwebtoken");
 var typeorm_1 = require("typeorm");
 var UserRepository_1 = require("../modules/Users/repositories/UserRepository");
+var AppError_1 = __importDefault(require("../utils/AppError"));
 function ensureAuthenticated(request, response, next) {
     return __awaiter(this, void 0, void 0, function () {
         var authHeader, _a, token, email, userRepository, user;
@@ -53,12 +57,11 @@ function ensureAuthenticated(request, response, next) {
                     _a = authHeader.split(" "), token = _a[1];
                     email = jsonwebtoken_1.verify(token, "Renato").email;
                     userRepository = typeorm_1.getCustomRepository(UserRepository_1.UserRepository);
-                    console.log(email);
                     return [4 /*yield*/, userRepository.findOne({ email: email })];
                 case 1:
                     user = _b.sent();
                     if (!user) {
-                        throw new Error("Invalid Token");
+                        throw new AppError_1.default("Invalid Token");
                     }
                     next();
                     return [2 /*return*/];

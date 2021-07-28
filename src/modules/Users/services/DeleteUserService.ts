@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 
+import AppError from "../../../utils/AppError";
 import { UserRepository } from "../repositories/UserRepository";
 
 interface IUserUpdate {
@@ -15,7 +16,7 @@ class DeleteUserService {
     });
 
     if (!user) {
-      console.log("Usuário não encontrado");
+      throw new AppError("Usuário não encontrado");
     }
 
     await userRepository.delete(id);

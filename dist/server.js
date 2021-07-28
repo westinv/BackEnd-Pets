@@ -35,4 +35,7 @@ app.use(express_1.default.json());
 app.use(UsersRoutes_1.userRoutes);
 app.use(PetsRoutes_1.petsRoutes);
 app.use(AuthenticateUserRoutes_1.authenticateUserRoutes);
-app.listen(3333, function () { return console.log("rodando"); });
+app.get("/", function (request, response) {
+    response.status(200).json({ message: "Servidor online" });
+});
+app.listen(process.env.PORT || 3333, function () { return console.log("rodando"); });

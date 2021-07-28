@@ -37,8 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersControler = void 0;
-var typeorm_1 = require("typeorm");
-var UserRepository_1 = require("../repositories/UserRepository");
 var AuthenticateUserService_1 = require("../services/AuthenticateUserService");
 var CreateUserService_1 = require("../services/CreateUserService");
 var DeleteUserService_1 = require("../services/DeleteUserService");
@@ -49,27 +47,38 @@ var UsersControler = /** @class */ (function () {
     }
     UsersControler.prototype.create = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, nome, username, password, email, telefone, createUserService;
+            var _a, nome, username, password, email, telefone, createUserService, error_1;
             return __generator(this, function (_b) {
-                _a = request.body, nome = _a.nome, username = _a.username, password = _a.password, email = _a.email, telefone = _a.telefone;
-                createUserService = new CreateUserService_1.CreateUserService();
-                createUserService.execute({
-                    nome: nome,
-                    username: username,
-                    password: password,
-                    email: email,
-                    telefone: telefone,
-                });
-                return [2 /*return*/, response.status(201).send()];
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = request.body, nome = _a.nome, username = _a.username, password = _a.password, email = _a.email, telefone = _a.telefone;
+                        createUserService = new CreateUserService_1.CreateUserService();
+                        return [4 /*yield*/, createUserService.execute({
+                                nome: nome,
+                                username: username,
+                                password: password,
+                                email: email,
+                                telefone: telefone,
+                            })];
+                    case 1:
+                        _b.sent();
+                        return [2 /*return*/, response.status(201).send()];
+                    case 2:
+                        error_1 = _b.sent();
+                        return [2 /*return*/, response.status(400).json(error_1.message)];
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
     UsersControler.prototype.showUserByEmail = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var showUserByEmail, email, user;
+            var showUserByEmail, email, user, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 2, , 3]);
                         showUserByEmail = new ShowUserByEmailService_1.ShowUserByEmailService();
                         email = request.params.email;
                         return [4 /*yield*/, showUserByEmail.execute({
@@ -78,18 +87,21 @@ var UsersControler = /** @class */ (function () {
                     case 1:
                         user = _a.sent();
                         return [2 /*return*/, response.json(user)];
+                    case 2:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, response.status(400).json(error_2.message)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
     UsersControler.prototype.authenticateUser = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var userRepository, _a, email, password, authenticateUserService, authenticateInfo, error_1;
+            var _a, email, password, authenticateUserService, authenticateInfo, error_3;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         _b.trys.push([0, 2, , 3]);
-                        userRepository = typeorm_1.getCustomRepository(UserRepository_1.UserRepository);
                         _a = request.body, email = _a.email, password = _a.password;
                         authenticateUserService = new AuthenticateUserService_1.AuthenticateUserService();
                         return [4 /*yield*/, authenticateUserService.execute({
@@ -100,8 +112,8 @@ var UsersControler = /** @class */ (function () {
                         authenticateInfo = _b.sent();
                         return [2 /*return*/, response.status(200).json(authenticateInfo)];
                     case 2:
-                        error_1 = _b.sent();
-                        return [2 /*return*/, response.status(500).send()];
+                        error_3 = _b.sent();
+                        return [2 /*return*/, response.status(400).json(error_3.message)];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -109,10 +121,11 @@ var UsersControler = /** @class */ (function () {
     };
     UsersControler.prototype.updateUser = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var updateUserService, id, _a, nome, username, password, email, telefone, updatedUser;
+            var updateUserService, id, _a, nome, username, password, email, telefone, updatedUser, error_4;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        _b.trys.push([0, 2, , 3]);
                         updateUserService = new UpdateUserService_1.UpdateUserService();
                         id = request.params.id;
                         _a = request.body, nome = _a.nome, username = _a.username, password = _a.password, email = _a.email, telefone = _a.telefone;
@@ -127,16 +140,21 @@ var UsersControler = /** @class */ (function () {
                     case 1:
                         updatedUser = _b.sent();
                         return [2 /*return*/, response.status(201).json(updatedUser)];
+                    case 2:
+                        error_4 = _b.sent();
+                        return [2 /*return*/, response.status(400).json(error_4.message)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
     UsersControler.prototype.deleteUser = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var deleteUserService, id;
+            var deleteUserService, id, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 2, , 3]);
                         deleteUserService = new DeleteUserService_1.DeleteUserService();
                         id = request.params.id;
                         return [4 /*yield*/, deleteUserService.execute({
@@ -144,7 +162,11 @@ var UsersControler = /** @class */ (function () {
                             })];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/, response.status(201).send()];
+                        return [2 /*return*/, response.status(200).send()];
+                    case 2:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, response.status(400).json(error_5.message)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
