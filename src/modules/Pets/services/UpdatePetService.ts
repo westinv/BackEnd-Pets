@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 
+import AppError from "../../../utils/AppError";
 import { PetsRepository } from "../repositories/PetsRepositories";
 
 interface IPetsUpdate {
@@ -31,7 +32,7 @@ class UpdatePetService {
     });
 
     if (!pet) {
-      console.log("Pet não encontrado");
+      throw new AppError("Pets não encontrado");
     }
 
     const updatedPet = {

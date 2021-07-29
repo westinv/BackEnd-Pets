@@ -35,9 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ListPetByRacaService = void 0;
 var typeorm_1 = require("typeorm");
+var AppError_1 = __importDefault(require("../../../utils/AppError"));
 var PetsRepositories_1 = require("../repositories/PetsRepositories");
 var ListPetByRacaService = /** @class */ (function () {
     function ListPetByRacaService() {
@@ -53,6 +57,9 @@ var ListPetByRacaService = /** @class */ (function () {
                         return [4 /*yield*/, petRepository.find({ raca: raca })];
                     case 1:
                         pets = _b.sent();
+                        if (!pets) {
+                            throw new AppError_1.default("Pets não encontrado");
+                        }
                         return [2 /*return*/, pets];
                 }
             });

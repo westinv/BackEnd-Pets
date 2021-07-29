@@ -8,10 +8,10 @@ module.exports = {
     }
   },
   "entities": [
-    "dist/modules/**/model/*.js"
+    "dist/modules/**/model/*.ts"
   ],
   "migrations": [
-    "dist/database/migrations/*.js"
+    "dist/database/migrations/*.ts"
   ],
   "cli": {
     "migrationsDir": "src/database/migrations",

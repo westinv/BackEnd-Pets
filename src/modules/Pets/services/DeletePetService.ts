@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 
+import AppError from "../../../utils/AppError";
 import { PetsRepository } from "../repositories/PetsRepositories";
 
 interface IPetsUpdate {
@@ -15,7 +16,7 @@ class DeletePetService {
     });
 
     if (!pet) {
-      console.log("Pet não encontrado");
+      throw new AppError("Pet não encontrado");
     }
 
     await petsRepository.delete(id);
