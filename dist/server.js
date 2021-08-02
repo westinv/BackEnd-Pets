@@ -24,14 +24,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv = __importStar(require("dotenv"));
 var express_1 = __importDefault(require("express"));
+var swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 require("./database");
 require("reflect-metadata");
 var PetsRoutes_1 = require("./modules/Pets/routes/PetsRoutes");
 var AuthenticateUserRoutes_1 = require("./modules/Users/routes/AuthenticateUserRoutes");
 var UsersRoutes_1 = require("./modules/Users/routes/UsersRoutes");
+var swagger_json_1 = __importDefault(require("./swagger.json"));
 dotenv.config();
 var app = express_1.default();
 app.use(express_1.default.json());
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_json_1.default));
 app.use(UsersRoutes_1.userRoutes);
 app.use(PetsRoutes_1.petsRoutes);
 app.use(AuthenticateUserRoutes_1.authenticateUserRoutes);
