@@ -1,6 +1,2 @@
 node_modules
 .env
-coverage
-jest.config.ts
-**/*.test.ts
-**/*.test.js
