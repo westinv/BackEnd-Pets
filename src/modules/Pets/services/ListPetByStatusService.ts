@@ -13,7 +13,7 @@ class ListPetByStatusService {
 
     const pets = await petRepository.find({ status });
 
-    if (!pets) {
+    if (pets.length === 0) {
       throw new AppError("Pets não encontrado");
     }
 

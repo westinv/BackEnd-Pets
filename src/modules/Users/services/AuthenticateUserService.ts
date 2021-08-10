@@ -19,7 +19,6 @@ class AuthenticateUserService {
     if (!user) {
       throw new AppError("Usuário não encontrado");
     }
-    console.log(user.password);
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {

@@ -57,7 +57,7 @@ var ListPetByStatusService = /** @class */ (function () {
                         return [4 /*yield*/, petRepository.find({ status: status })];
                     case 1:
                         pets = _b.sent();
-                        if (!pets) {
+                        if (pets.length === 0) {
                             throw new AppError_1.default("Pets não encontrado");
                         }
                         return [2 /*return*/, pets];

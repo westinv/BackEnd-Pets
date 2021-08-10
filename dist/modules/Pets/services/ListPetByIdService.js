@@ -59,7 +59,7 @@ var ListPetByIdService = /** @class */ (function () {
                             })];
                     case 1:
                         pet = _b.sent();
-                        if (!pet) {
+                        if (pet === undefined) {
                             throw new AppError_1.default("Pets não encontrado");
                         }
                         return [2 /*return*/, pet];

@@ -13,7 +13,7 @@ class ListPetByRacaService {
 
     const pets = await petRepository.find({ raca });
 
-    if (!pets) {
+    if (pets.length === 0) {
       throw new AppError("Pets não encontrado");
     }
 

@@ -15,7 +15,7 @@ class ListPetByIdService {
       id,
     });
 
-    if (!pet) {
+    if (pet === undefined) {
       throw new AppError("Pets não encontrado");
     }
 

@@ -62,7 +62,6 @@ var AuthenticateUserService = /** @class */ (function () {
                         if (!user) {
                             throw new AppError_1.default("Usuário não encontrado");
                         }
-                        console.log(user.password);
                         return [4 /*yield*/, bcryptjs_1.compare(password, user.password)];
                     case 2:
                         passwordMatch = _b.sent();

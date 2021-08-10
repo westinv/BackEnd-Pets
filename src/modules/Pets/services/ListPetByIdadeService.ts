@@ -13,7 +13,7 @@ class ListPetByIdadeService {
 
     const pets = await petRepository.find({ idade });
 
-    if (!pets) {
+    if (pets.length === 0) {
       throw new AppError("Pets não encontrado");
     }
 
